@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "840078952512",
+    "firebase_url": "https://csgcarpool.firebaseio.com",
+    "project_id": "csgcarpool",
+    "storage_bucket": "csgcarpool.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:840078952512:android:5a6f42c8aa66ee57",
+        "android_client_info": {
+          "package_name": "csg.sai.csgcarpool"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "840078952512-83eeincbq38bod3oukr1a0igqb6po1im.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABuvuEhH2SpETe5nOn9NnFUDb6XEErwVk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
