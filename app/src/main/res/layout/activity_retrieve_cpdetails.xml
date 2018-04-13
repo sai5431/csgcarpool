@@ -6,19 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".RetrieveCPDetailsActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/cpdview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="6dp" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="28dp">
 
-    <Button
-        android:id="@+id/btn_pool"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Pool your car !"
-        tools:layout_editor_absoluteX="10dp"
-        tools:layout_editor_absoluteY="446dp" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/cpdview"
+            android:layout_width="match_parent"
+            android:layout_height="476dp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="6dp" />
+
+        <Button
+            android:id="@+id/btn_pool"
+            android:layout_width="match_parent"
+            android:layout_height="78dp"
+            android:layout_marginBottom="10dp"
+            android:text="Pool your car !" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

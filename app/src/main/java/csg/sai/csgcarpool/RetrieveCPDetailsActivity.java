@@ -1,11 +1,14 @@
 package csg.sai.csgcarpool;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
@@ -41,9 +44,18 @@ public class RetrieveCPDetailsActivity extends AppCompatActivity {
         recyclerview.setLayoutManager(layoutManager);
         recyclerview.setItemAnimator(new DefaultItemAnimator());
         recyclerview.setAdapter(retrieveCPDetailsAdapter);
-    
-      
-        
+
+        recyclerview.addOnItemTouchListener(new RecyclerTouchLiatner(this, recyclerview, new ClickListner() {
+            @Override
+            public void onClick(View view, int pos) {
+                startActivity(new Intent(RetrieveCPDetailsActivity.this,ChecknJoinActivity.class));
+            }
+
+            @Override
+            public void onLongClick(View view, int pos) {
+
+            }
+        }));
 
         rdatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -63,8 +75,6 @@ public class RetrieveCPDetailsActivity extends AppCompatActivity {
                     
                 }
                 
-
-                
             }
 
             @Override
@@ -80,5 +90,58 @@ public class RetrieveCPDetailsActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public static interface ClickListner{
+        public void onClick(View view, int pos);
+        public void onLongClick(View view, int pos);
+    }
+
+    public class RecyclerTouchLiatner implements RecyclerView.OnItemTouchListener{
+
+        private ClickListner clicklistener;
+        private GestureDetector gestureDetector;
+
+        public RecyclerTouchLiatner (Context scontext, final RecyclerView srecyclerView, final ClickListner sclickListner){
+
+            this.clicklistener = sclickListner;
+            gestureDetector = new GestureDetector( scontext, new GestureDetector.SimpleOnGestureListener(){
+
+                @Override
+                public boolean onSingleTapUp(MotionEvent e) {
+                    return true;
+                }
+
+                @Override
+                public void onLongPress(MotionEvent e) {
+
+                    View view = srecyclerView.findChildViewUnder(e.getX(),e.getY());
+                    if ( view != null && clicklistener != null){
+                        clicklistener.onLongClick(view,srecyclerView.getChildAdapterPosition(view));
+                    }
+
+                }
+            });
+        }
+
+        @Override
+        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+
+            View view = rv.findChildViewUnder(e.getX(),e.getY());
+            if ( view != null && clicklistener != null){
+                clicklistener.onClick(view,rv.getChildAdapterPosition(view));
+            }
+            return false;
+        }
+
+        @Override
+        public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+        }
+
+        @Override
+        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+        }
     }
 }
