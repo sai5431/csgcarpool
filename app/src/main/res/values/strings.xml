@@ -12,9 +12,13 @@
     <string name="title_activity_profile">CSG Carpool</string>
     <string name="title_activity_login">Sign in</string>
     <string name="hint_email">Email</string>
+    <string name="hint_phone">Phone Number</string>
+    <string name="hint_destination">Destination</string>
+    <string name="hint_seats">Seats available</string>
     <string name="hint_password">Password</string>
     <string name="hint_name">Fullname</string>
     <string name="btn_login">LOGIN</string>
+    <string name="btn_save">SAVE</string>
     <string name="btn_link_to_register">Not a member? Get registered in CSG carpool now!</string>
     <string name="btn_link_to_login">Already registered. Login Me!</string>
     <string name="title_activity_reset_password">ResetPasswordActivity</string>
