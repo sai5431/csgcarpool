@@ -33,12 +33,21 @@ public class RetrieveCPDetailsActivity extends AppCompatActivity {
         poolbtn = (Button) findViewById(R.id.btn_pool);
 
         rdatabase = FirebaseDatabase.getInstance().getReference();
+    
+        cpDetailsLists = new ArrayList<>();
+    
+        final RetrieveCPDetailsAdapter retrieveCPDetailsAdapter = new RetrieveCPDetailsAdapter(cpDetailsLists);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(RetrieveCPDetailsActivity.this);
+        recyclerview.setLayoutManager(layoutManager);
+        recyclerview.setItemAnimator(new DefaultItemAnimator());
+        recyclerview.setAdapter(retrieveCPDetailsAdapter);
+    
+      
+        
 
         rdatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                cpDetailsLists = new ArrayList<>();
-
                 for (DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()){
                     CarPoolDetails carPoolDetails = dataSnapshot1.getValue(CarPoolDetails.class);
                     CPDetailsList cpList = new CPDetailsList();
@@ -46,19 +55,16 @@ public class RetrieveCPDetailsActivity extends AppCompatActivity {
                     String destin = carPoolDetails.getDestination();
                     String seta = carPoolDetails.getSeats();
                     String phnooo = carPoolDetails.getPhoneNumber();
-
                     cpList.setName(name);
                     cpList.setDestination(destin);
                     cpList.setSeats(seta);
                     cpList.setPhoneNumber(phnooo);
+                    retrieveCPDetailsAdapter.updateData(cpList);
+                    
                 }
+                
 
-                RetrieveCPDetailsAdapter retrieveCPDetailsAdapter = new RetrieveCPDetailsAdapter(cpDetailsLists);
-                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(RetrieveCPDetailsActivity.this);
-                recyclerview.setLayoutManager(layoutManager);
-                recyclerview.setItemAnimator(new DefaultItemAnimator());
-                recyclerview.setAdapter(retrieveCPDetailsAdapter);
-                retrieveCPDetailsAdapter.notifyDataSetChanged();
+                
             }
 
             @Override
