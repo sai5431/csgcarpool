@@ -95,7 +95,9 @@ public class AddCPDetailsActivity extends AppCompatActivity {
 
     public boolean findPlace(View view){
         try {
-            Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN).build(this);
+            AutocompleteFilter autocompleteFilter = new AutocompleteFilter.Builder().setTypeFilter(Place.TYPE_COUNTRY).setCountry("IN")
+                    .setTypeFilter(AutocompleteFilter.TYPE_FILTER_REGIONS).build();
+            Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN).setFilter(autocompleteFilter).build(this);
             startActivityForResult(intent,1);
         }catch (GooglePlayServicesRepairableException e){
             Toast.makeText(AddCPDetailsActivity.this,"Not Available",Toast.LENGTH_SHORT).show();
@@ -110,7 +112,7 @@ public class AddCPDetailsActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode ==1){
             if (resultCode == RESULT_OK){
-                AutocompleteFilter autocompleteFilter = new AutocompleteFilter.Builder().setCountry("IND").setTypeFilter(AutocompleteFilter.TYPE_FILTER_REGIONS).build();
+
                 Place place = PlaceAutocomplete.getPlace(this, data);
                 if(sORR == true) {
                     ((TextView) findViewById(R.id.source)).setText(place.getName());
