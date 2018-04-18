@@ -17,12 +17,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RetrieveCPDetailsActivity extends AppCompatActivity {
-
+    private final String TOPIC = "CSG_CAR_POOL";
     private DatabaseReference rdatabase;
     RecyclerView recyclerview;
     Button poolbtn;
@@ -31,7 +32,7 @@ public class RetrieveCPDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_retrieve_cpdetails);
-
+        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC);
         recyclerview = (RecyclerView) findViewById(R.id.cpdview);
         poolbtn = (Button) findViewById(R.id.btn_pool);
 
@@ -39,23 +40,13 @@ public class RetrieveCPDetailsActivity extends AppCompatActivity {
     
         cpDetailsLists = new ArrayList<>();
     
-        final RetrieveCPDetailsAdapter retrieveCPDetailsAdapter = new RetrieveCPDetailsAdapter(cpDetailsLists);
+        final RetrieveCPDetailsAdapter retrieveCPDetailsAdapter = new RetrieveCPDetailsAdapter(cpDetailsLists,this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(RetrieveCPDetailsActivity.this);
         recyclerview.setLayoutManager(layoutManager);
         recyclerview.setItemAnimator(new DefaultItemAnimator());
         recyclerview.setAdapter(retrieveCPDetailsAdapter);
 
-        recyclerview.addOnItemTouchListener(new RecyclerTouchLiatner(this, recyclerview, new ClickListner() {
-            @Override
-            public void onClick(View view, int pos) {
-                startActivity(new Intent(RetrieveCPDetailsActivity.this,ChecknJoinActivity.class));
-            }
 
-            @Override
-            public void onLongClick(View view, int pos) {
-
-            }
-        }));
 
         rdatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -92,56 +83,4 @@ public class RetrieveCPDetailsActivity extends AppCompatActivity {
 
     }
 
-    public static interface ClickListner{
-        public void onClick(View view, int pos);
-        public void onLongClick(View view, int pos);
-    }
-
-    public class RecyclerTouchLiatner implements RecyclerView.OnItemTouchListener{
-
-        private ClickListner clicklistener;
-        private GestureDetector gestureDetector;
-
-        public RecyclerTouchLiatner (Context scontext, final RecyclerView srecyclerView, final ClickListner sclickListner){
-
-            this.clicklistener = sclickListner;
-            gestureDetector = new GestureDetector( scontext, new GestureDetector.SimpleOnGestureListener(){
-
-                @Override
-                public boolean onSingleTapUp(MotionEvent e) {
-                    return true;
-                }
-
-                @Override
-                public void onLongPress(MotionEvent e) {
-
-                    View view = srecyclerView.findChildViewUnder(e.getX(),e.getY());
-                    if ( view != null && clicklistener != null){
-                        clicklistener.onLongClick(view,srecyclerView.getChildAdapterPosition(view));
-                    }
-
-                }
-            });
-        }
-
-        @Override
-        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-
-            View view = rv.findChildViewUnder(e.getX(),e.getY());
-            if ( view != null && clicklistener != null){
-                clicklistener.onClick(view,rv.getChildAdapterPosition(view));
-            }
-            return false;
-        }
-
-        @Override
-        public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-
-        }
-
-        @Override
-        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-        }
-    }
 }

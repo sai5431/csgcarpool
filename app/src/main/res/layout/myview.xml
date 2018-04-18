@@ -3,7 +3,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="90dp"
-    android:background="@drawable/black_border">
+    android:background="@drawable/black_border"
+    android:id="@+id/myviewid">
 
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
