@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">CSG Car Pool</string>
+    <string name="easy_name">Easy Commute</string>
+    <string name="edit_name">Edit your credentials</string>
+    <string name="happy">Happy Pooling !!!</string>
     <string name="action_sign_in_short">Register</string>
     <string name="email">Email</string>
     <string name="minimum_password">Password too short, enter minimum 6 characters!</string>

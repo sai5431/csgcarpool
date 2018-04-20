@@ -7,21 +7,6 @@
     android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        app:elevation="0dp">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimaryDark"
-             />
-
-    </android.support.design.widget.AppBarLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -79,7 +64,7 @@
             android:layout_marginTop="16dp"
             android:background="@color/colorPrimaryDark"
             android:text="@string/btn_change"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textStyle="bold" />
 
         <Button
@@ -90,7 +75,7 @@
             android:layout_marginTop="16dp"
             android:background="@color/colorPrimaryDark"
             android:text="@string/btn_change"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textStyle="bold" />
 
         <Button
@@ -101,7 +86,7 @@
             android:layout_marginTop="16dp"
             android:background="@color/colorPrimaryDark"
             android:text="@string/btn_send"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textStyle="bold" />
 
         <ProgressBar
@@ -118,7 +103,7 @@
             android:layout_marginTop="16dp"
             android:background="@color/colorPrimaryDark"
             android:text="@string/btn_remove"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textStyle="bold" />
 
         <Button
@@ -165,7 +150,7 @@
             android:layout_marginTop="16dp"
             android:background="@color/colorPrimary"
             android:text="@string/btn_sign_out"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textStyle="bold" />
 
     </LinearLayout>
